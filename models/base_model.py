@@ -5,12 +5,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Integer, Column, DateTime, ForeignKey
 from datetime import datetime
 
-Base = declarative()
+Base = declarative_base()
 
 
 
 class BaseModel:
     """A base class for all hbnb models"""
+    __tablename__ = 'base_model'
     id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
