@@ -31,7 +31,6 @@ place_amenity = Table(
 between Place and Amenity records.
 """
 
-
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
