@@ -20,8 +20,7 @@ sudo chown -R ubuntu:ubuntu /data/
 
 # Update Nginx configuration
 nginx_config="/etc/nginx/sites-available/default"
-sudo sed -i '/^\tlocation \/ {/i\
-\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' "$nginx_config"
+sudo sed -i '/^\tlocation \/ {/i\\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' "$nginx_config"
 
 # Restart Nginx
 sudo service nginx restart
