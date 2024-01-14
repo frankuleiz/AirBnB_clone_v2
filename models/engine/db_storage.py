@@ -62,7 +62,7 @@ class DBStorage:
             )
 
     def new(self, obj):
-    """Adds new object to storage database"""
+        """Adds new object to storage database"""
     if obj is not None:
         try:
             self.__session.add(obj)
