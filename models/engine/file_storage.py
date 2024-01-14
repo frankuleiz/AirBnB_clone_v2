@@ -29,7 +29,7 @@ class FileStorage:
                     filtered_dict[key] = value
             return filtered_dict
 
-    def delete(self, obj = None):
+    def delete(self, obj=None):
         """deletes objects from a dictionary"""
         if obj is not None:
             obj_key = obj.to_dict()['__class__'] + '.' + obj.id
@@ -69,6 +69,10 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+
+    def close():
+        """Closes the storage engine"""
+        self.reload()
