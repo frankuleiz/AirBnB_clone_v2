@@ -33,7 +33,7 @@ def python_page(text):
     return 'Python {}'.format(text.replace('_', ' '))
 
 
-@app.route('/number/<n>')
+@app.route('/number/<int:n>')
 def number_page(n):
     return '{} is a number'.format(n)
 
