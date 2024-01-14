@@ -62,29 +62,32 @@ class DBStorage:
             )
 
     def new(self, obj):
-        """Adds new object to storage database"""
-        if obj is not None:
-            try:
-                self.__session.add(obj)
-                self.__session.flush()
-                self.__session.refresh(obj)
-            except Exception as ex:
-                self.__session.rollback()
-                raise ex
+    """Adds new object to storage database"""
+    if obj is not None:
+        try:
+            self.__session.add(obj)
+            self.__session.flush()
+            self.__session.refresh(obj)
+        except Exception as ex:
+            self.__session.rollback()
+            # Log the exception or print additional information
+            print(f"Error adding object to the database: {ex}")
+            raise ex
+
 
     def save(self):
         """Commits the session changes to database"""
         self.__session.commit()
 
     def reload(self):
-        """Loads storage database"""
-        Base.metadata.create_all(self.__engine)
-        SessionFactory = sessionmaker(
-            bind=self.__engine,
-            expire_on_commit=False
-        )
-        self.__session = scoped_session(SessionFactory)()
+    """Loads storage database"""
+    Base.metadata.create_all(self.__engine)
+    self.__session = scoped_session(sessionmaker(
+        bind=self.__engine,
+        expire_on_commit=False
+    ))
+
 
     def close(self):
         """Closes the storage engine."""
-        self.__session.close()
+        self.__session.remove()
