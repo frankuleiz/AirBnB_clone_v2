@@ -30,7 +30,7 @@ def c_page(text):
 @app.route('/python', defaults={'text': 'is cool'})
 def python_page(text):
     """The python page route"""
-    return 'Python {}'.format(text.replace('/', ' '))
+    return 'Python {}'.format(text.replace('_', ' '))
 
 
 if __name__ == "__main__":
