@@ -9,24 +9,23 @@ from models.city import City
 
 class State(BaseModel, Base):
     """ State class """
-    __tablename__ = "states"
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref=backref(
-            "state", cascade="all, delete"))
+    __tablename__ = 'states'
+    name = Column(
+        String(128), nullable=False
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else ''
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        cities = relationship(
+            'City',
+            cascade='all, delete, delete-orphan',
+            backref='state'
+        )
     else:
-        name = ""
-
-    @property
-    def cities(self):
-        """
-        Getter attribute that returns the list of instances
-        with state.id equals the currrent state.id
-        """
-        from models import storage
-        related_cities = []
-        my_cities = storage.all(City)
-        for city in my_cities.values():
-            if self.id == city.state_id:
-                related_cities.append(city)
-        return related_cities
+        @property
+        def cities(self):
+            """Returns the cities in this State"""
+            from models import storage
+            cities_in_state = []
+            for value in storage.all(City).values():
+                if value.state_id == self.id:
+                    cities_in_state.append(value)
+            return cities_in_state
