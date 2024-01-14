@@ -74,7 +74,6 @@ class DBStorage:
             print(f"Error adding object to the database: {ex}")
             raise ex
 
-
     def save(self):
         """Commits the session changes to database"""
         self.__session.commit()
@@ -86,7 +85,6 @@ class DBStorage:
         bind=self.__engine,
         expire_on_commit=False
     ))
-
 
     def close(self):
         """Closes the storage engine."""
