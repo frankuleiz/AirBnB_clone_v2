@@ -26,5 +26,11 @@ def c_page(text):
     return 'C {}'.format(text.replace('_', ' '))
 
 
+@app.route('/python/<text>')
+@app.route('/python', defaults={'text': 'is cool'})
+def python_page(text):
+    return 'Python {}'.format(text.replace('/', ' '))
+
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')
