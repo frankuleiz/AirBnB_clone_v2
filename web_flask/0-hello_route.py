@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-from flask import Flask
 """The script starts a web flask application
 """
+from flask import Flask
 
 
 app = Flask(__name__)
-"""The Flask app instance"""
+"""The flask app instance"""
 app.url_map.strict_slashes = False
 
 
 @app.route('/')
 def index():
-    """The home page"""
-    return 'Hello HBNB!'
+    """The homepage"""
+    return "Hello HBNB!"
 
 
 if __name__ == "__main__":
